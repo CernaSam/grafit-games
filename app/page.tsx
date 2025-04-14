@@ -25,6 +25,9 @@ function HomePage() {
             <Link href="#about" className="text-sm font-medium hover:text-yellow-500 transition-colors">
               {t("nav.about")}
             </Link>
+            <Link href="#legal" className="text-sm font-medium hover:text-yellow-500 transition-colors">
+              {t("nav.legal")}
+            </Link>
           </nav>
           <div className="flex items-center gap-4">
             <LanguageSwitcher />
@@ -319,7 +322,7 @@ function HomePage() {
         </section>
 
         {/* Legal Structure Section */}
-        <section className="py-20 bg-yellow-50">
+        <section id="legal" className="py-20 bg-yellow-50">
           <div className="container px-4 md:px-6">
             <div className="flex flex-col items-center text-center space-y-4 mb-12">
               <h2 className="text-3xl md:text-4xl font-bold">{t("legal.title")}</h2>

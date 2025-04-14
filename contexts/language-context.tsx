@@ -15,6 +15,7 @@ const translations = {
     // Navigation
     "nav.process": "Process",
     "nav.about": "About Us",
+    "nav.legal": "Legal Form",
 
     // Hero
     "hero.badge": "Launching 2026",
@@ -97,6 +98,7 @@ const translations = {
     // Navigation
     "nav.process": "Proces",
     "nav.about": "O nás",
+    "nav.legal": "Legální forma",
 
     // Hero
     "hero.badge": "Spouštíme 2026",
