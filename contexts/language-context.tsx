@@ -1,6 +1,6 @@
 "use client"
 
-import { createContext, useContext, useState, type ReactNode } from "react"
+import { createContext, useContext, useState, useEffect, type ReactNode } from "react"
 
 type Language = "en" | "cs"
 
@@ -10,39 +10,67 @@ interface LanguageContextType {
   t: (key: string) => string
 }
 
+const LOCAL_STORAGE_KEY = "preferred-language"
+
 const translations = {
   en: {
+    
     // Navigation
     "nav.process": "Process",
     "nav.about": "About Us",
     "nav.legal": "Legal Form",
-
+    
     // Hero
     "hero.badge": "🚧 Launching Soon!  Expected: September 2026 🔧",
     "hero.title": "Turn Your Student Game Into a Successful Business",
     "hero.description":
-      "GameLaunch provides the legal structure and funding you need to take your developed game from classroom project to market success.",
-    "hero.learnMore": "Learn More",
+    "Grafit Games provides the legal structure and funding you need to take your developed game from classroom project to market success.",
+    "hero.learnMore": "Learn About Grafit",
     "hero.watchDemo": "Watch Demo",
-
+    
     // Process
     "process.title": "Our Incubation Process",
     "process.subtitle": "A structured journey to transform your game into a market-ready product",
-    "process.step1.title": "1. Application & Selection",
-    "process.step2.title": "2. Legal & Financial Setup",
-    "process.step3.title": "3. Mentorship & Polishing",
-    "process.step4.title": "4. Market Strategy",
-    "process.step5.title": "5. Launch Preparation",
-    "process.step6.title": "6. Market Release",
-    "process.learnMore": "Learn more",
-
+    "process.steps": [
+      {
+        title: "1. Application & Selection",
+        short: "Submit your game and get selected.",
+        full: "Submit your application with a playable build or concept, and we'll evaluate teams based on originality, feasibility, and market potential. ",
+      },
+      {
+        title: "2. Legal & Financial Setup",
+        short: "Get incorporated and funded.",
+        full: "We help set up your company, sort out ownership structure, and provide initial funding for your development.",
+      },
+      {
+        title: "3. Mentorship & Polishing",
+        short: "Iterate with expert support.",
+        full: "Access experienced game dev mentors who help refine your game design, art direction, and technical polish.",
+      },
+      {
+        title: "4. Market Strategy",
+        short: "Prepare for your audience.",
+        full: "We guide your positioning, marketing strategy, and help build your community through social media and influencers.",
+      },
+      {
+        title: "5. Launch Preparation",
+        short: "Lock in your launch plan.",
+        full: "Develop your final build, store presence, trailers, and all materials needed for a strong launch.",
+      },
+      {
+        title: "6. Market Release",
+        short: "Release your game to the world.",
+        full: "Launch across platforms, get post-release analytics, and continue with support, patches, and potential funding rounds.",
+      },
+    ],
+    
     // About Incubator
     "about.title": "About The Incubator",
     "about.stats.funding": "Initial Funding",
     "about.stats.teams": "Teams Per Year",
     "about.stats.duration": "Program Duration",
     "about.stats.success": "Success Rate",
-    "about.why": "Why Choose GameLaunch?",
+    "about.why": "Why Choose Grafit Games?",
     "about.feature1": "Legal structure and incorporation assistance",
     "about.feature2": "Seed funding to support your launch",
     "about.feature3": "Industry mentors and expert guidance",
@@ -50,7 +78,7 @@ const translations = {
 
     // About Us
     "aboutUs.title": "About Us",
-    "aboutUs.subtitle": "Meet the team behind GameLaunch",
+    "aboutUs.subtitle": "Meet the team behind Grafit Games",
     "aboutUs.partners": "Our University Partners",
 
     // Legal Structure
@@ -89,7 +117,7 @@ const translations = {
     "footer.quickLinks": "Quick Links",
     "footer.resources": "Resources",
     "footer.contact": "Contact",
-    "footer.rights": "© 2026 GameLaunch Incubator. All rights reserved.",
+    "footer.rights": "© 2025 Grafit Games Incubator. All rights reserved.",
 
     // Language
     language: "CZ",
@@ -104,20 +132,45 @@ const translations = {
     "hero.badge": "🚧 Spouštíme brzy!  Odhad: Září 2026 🔧",
     "hero.title": "Proměňte svou studentskou hru v úspěšný byznys",
     "hero.description":
-      "GameLaunch poskytuje právní strukturu a financování, které potřebujete k přeměně vaší hry ze školního projektu na úspěšný produkt.",
-    "hero.learnMore": "Zjistit více",
+      "Grafit Games poskytuje právní strukturu a financování, které potřebujete k přeměně vaší hry ze školního projektu na úspěšný produkt.",
+    "hero.learnMore": "Zjistit více o Grafit",
     "hero.watchDemo": "Zhlédnout demo",
 
     // Process
     "process.title": "Náš inkubační proces",
     "process.subtitle": "Strukturovaná cesta k přeměně vaší hry na produkt připravený pro trh",
-    "process.step1.title": "1. Přihláška a výběr",
-    "process.step2.title": "2. Právní a finanční nastavení",
-    "process.step3.title": "3. Mentoring a vylepšování",
-    "process.step4.title": "4. Marketingová strategie",
-    "process.step5.title": "5. Příprava na uvedení",
-    "process.step6.title": "6. Uvedení na trh",
-    "process.learnMore": "Zjistit více",
+    "process.steps": [
+      {
+        title: "1. Přihláška a výběr",
+        short: "Odešlete svou hru a buďte vybráni.",
+        full: "Pošlete přihlášku s hratelným buildem nebo konceptem a my ohodnotíme týmy podle originality, proveditelnosti a tržního potenciálu.",
+      },
+      {
+        title: "2. Právní a finanční nastavení",
+        short: "Založte firmu a získejte finance.",
+        full: "Pomůžeme vám založit společnost, vyřešit vlastnickou strukturu a získat počáteční financování pro vývoj.",
+      },
+      {
+        title: "3. Mentoring a vylepšování",
+        short: "Iterujte s podporou odborníků.",
+        full: "Získáte přístup ke zkušeným mentorům, kteří pomohou s designem hry, vizuály i technickým zpracováním.",
+      },
+      {
+        title: "4. Marketingová strategie",
+        short: "Připravte se na své publikum.",
+        full: "Pomáháme s positioningem, marketingem a budováním komunity přes sociální sítě a influencery.",
+      },
+      {
+        title: "5. Příprava na uvedení",
+        short: "Uzavřete plán spuštění.",
+        full: "Vytvořte finální verzi hry, stránky v obchodech, trailery a všechny potřebné materiály pro silné uvedení.",
+      },
+      {
+        title: "6. Uvedení na trh",
+        short: "Uveďte svou hru světu.",
+        full: "Spusťte hru napříč platformami, sledujte analýzy a pokračujte s podporou, aktualizacemi i dalším financováním.",
+      },
+    ],
 
     // About Incubator
     "about.title": "O inkubátoru",
@@ -125,7 +178,7 @@ const translations = {
     "about.stats.teams": "Týmů za rok",
     "about.stats.duration": "Délka programu",
     "about.stats.success": "Úspěšnost",
-    "about.why": "Proč zvolit GameLaunch?",
+    "about.why": "Proč zvolit Grafit Games?",
     "about.feature1": "Právní struktura a pomoc se založením",
     "about.feature2": "Počáteční financování pro váš start",
     "about.feature3": "Mentoři z oboru a odborné vedení",
@@ -133,7 +186,7 @@ const translations = {
 
     // About Us
     "aboutUs.title": "O nás",
-    "aboutUs.subtitle": "Seznamte se s týmem za GameLaunch",
+    "aboutUs.subtitle": "Seznamte se s týmem za Grafit Games",
     "aboutUs.partners": "Naši univerzitní partneři",
 
     // Legal Structure
@@ -172,28 +225,47 @@ const translations = {
     "footer.quickLinks": "Rychlé odkazy",
     "footer.resources": "Zdroje",
     "footer.contact": "Kontakt",
-    "footer.rights": "© 2026 GameLaunch Inkubátor. Všechna práva vyhrazena.",
+    "footer.rights": "© 2025 Grafit Games Inkubátor. Všechna práva vyhrazena.",
 
     // Language
     language: "EN",
   },
 }
 
-const LanguageContext = createContext<LanguageContextType | undefined>(undefined)
+const LanguageContext = createContext<LanguageContextType | undefined>(
+  undefined
+)
 
 export function LanguageProvider({ children }: { children: ReactNode }) {
-  const [language, setLanguage] = useState<Language>("en")
+  const [language, setLanguageState] = useState<Language>("en")
 
-  const t = (key: string) => {
-    return translations[language][key as keyof (typeof translations)[typeof language]] || key
+  useEffect(() => {
+    const storedLang = localStorage.getItem(LOCAL_STORAGE_KEY) as Language
+    if (storedLang) {
+      setLanguageState(storedLang)
+    }
+  }, [])
+
+  const setLanguage = (lang: Language) => {
+    setLanguageState(lang)
+    localStorage.setItem(LOCAL_STORAGE_KEY, lang)
   }
 
-  return <LanguageContext.Provider value={{ language, setLanguage, t }}>{children}</LanguageContext.Provider>
+  const t = (key: string): any => {
+    const value = translations[language][key as keyof typeof translations[typeof language]]
+    return value ?? key
+  }
+
+  return (
+    <LanguageContext.Provider value={{ language, setLanguage, t }}>
+      {children}
+    </LanguageContext.Provider>
+  )
 }
 
 export function useLanguage() {
   const context = useContext(LanguageContext)
-  if (context === undefined) {
+  if (!context) {
     throw new Error("useLanguage must be used within a LanguageProvider")
   }
   return context

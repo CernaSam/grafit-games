@@ -7,6 +7,41 @@ import Link from "next/link"
 import { LanguageProvider, useLanguage } from "@/contexts/language-context"
 import { LanguageSwitcher } from "@/components/language-switcher"
 import { Textarea } from "@/components/ui/textarea";
+import { useState } from "react";
+
+const icons = [Users, Scale, Shield, Award, BookOpen, Rocket]
+
+function IncubationSteps() {
+  const { t } = useLanguage()
+  const [expandedStepIndex, setExpandedStepIndex] = useState<number | null>(null);
+  const steps = t("process.steps", { returnObjects: true }) as Array<{ title: string; short: string; full: string }>
+
+  return (
+    <section id="process" className="py-20 bg-white">
+      <div className="container px-4 md:px-6">
+        <div className="flex flex-col items-center text-center space-y-4 mb-12">
+          <h2 className="text-3xl md:text-4xl font-bold">{t("process.title")}</h2>
+          <p className="text-gray-500 max-w-[700px]">{t("process.subtitle")}</p>
+        </div>
+
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mt-12">
+          {steps.map((step, index) => {
+            const Icon = icons[index % icons.length]
+            return (
+              <div key={index} className="border rounded-2xl p-6 shadow-sm hover:shadow-md transition" onClick={() => setExpandedStepIndex(prev => (prev === index ? null : index))}>
+                <div className="mb-4">
+                  <Icon className="text-yellow-500 h-8 w-8" />
+                </div>
+                <h3 className="text-lg font-semibold">{step.title}</h3>
+                <p className="text-sm text-gray-600 mt-2">{expandedStepIndex === index ? step.full : step.short}</p>
+              </div>
+            )
+          })}
+        </div>
+      </div>
+    </section>
+  )
+}
 
 function HomePage() {
   const { t } = useLanguage()
@@ -17,7 +52,7 @@ function HomePage() {
         <div className="container flex h-16 items-center justify-between">
           <div className="flex items-center gap-2">
             <Gamepad2 className="h-6 w-6 text-yellow-500" />
-            <span className="text-xl font-bold">GameLaunch</span>
+            <span className="text-xl font-bold"><Link href="#hero">Grafit Games</Link></span>
           </div>
           <nav className="hidden md:flex gap-6">
             <Link href="#process" className="text-sm font-medium hover:text-yellow-500 transition-colors">
@@ -40,7 +75,7 @@ function HomePage() {
       </header>
       <main className="flex-1">
         {/* Hero Section */}
-        <section className="py-20 md:py-32 bg-gradient-to-b from-yellow-50 to-white">
+        <section id="hero" className="py-20 md:py-32 bg-gradient-to-b from-yellow-50 to-white">
           <div className="container px-4 md:px-6">
             <div className="flex flex-col items-center text-center space-y-4">
               <div className="inline-block rounded-full bg-yellow-100 px-3 py-1 text-sm text-yellow-700 mb-4">
@@ -55,121 +90,19 @@ function HomePage() {
               </h1>
               <p className="text-gray-500 md:text-xl max-w-[700px]">{t("hero.description")}</p>
               <div className="flex flex-col sm:flex-row gap-4 mt-8">
-                <Button className="bg-yellow-500 hover:bg-yellow-600 text-white px-8">{t("hero.learnMore")}</Button>
-                <Button variant="outline" className="border-yellow-500 text-yellow-500 hover:bg-yellow-50">
-                  {t("hero.watchDemo")}
-                </Button>
+                <a href="https://fit.cvut.cz/cs/veda-a-vyzkum/zazemi/vyzkumne-skupiny/8375-grafit" target="_blank" rel="noopener noreferrer">
+                  <Button className="bg-yellow-500 hover:bg-yellow-600 text-white px-8">
+                    {t("hero.learnMore")}
+                  </Button>
+                </a>
+                <Button variant="outline" className="border-yellow-500 text-yellow-500 hover:bg-yellow-50">{t("hero.watchDemo")}</Button>
               </div>
             </div>
           </div>
         </section>
 
         {/* Process Section */}
-        <section id="process" className="py-20 bg-white">
-          <div className="container px-4 md:px-6">
-            <div className="flex flex-col items-center text-center space-y-4 mb-12">
-              <h2 className="text-3xl md:text-4xl font-bold">{t("process.title")}</h2>
-              <p className="text-gray-500 max-w-[700px]">{t("process.subtitle")}</p>
-            </div>
-
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mt-12">
-              {/* Process Step 1 */}
-              <div className="bg-white border-2 border-yellow-200 rounded-xl p-6 transition-all hover:shadow-lg hover:-translate-y-1">
-                <div className="w-12 h-12 bg-yellow-100 rounded-full flex items-center justify-center mb-4">
-                  <Users className="h-6 w-6 text-yellow-500" />
-                </div>
-                <h3 className="text-xl font-bold mb-2">{t("process.step1.title")}</h3>
-                <p className="text-gray-500 mb-4">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et
-                  dolore magna aliqua.
-                </p>
-                <div className="flex items-center text-yellow-500 font-medium">
-                  <span>{t("process.learnMore")}</span>
-                  <ArrowRight className="ml-2 h-4 w-4" />
-                </div>
-              </div>
-
-              {/* Process Step 2 */}
-              <div className="bg-white border-2 border-yellow-200 rounded-xl p-6 transition-all hover:shadow-lg hover:-translate-y-1">
-                <div className="w-12 h-12 bg-yellow-100 rounded-full flex items-center justify-center mb-4">
-                  <Rocket className="h-6 w-6 text-yellow-500" />
-                </div>
-                <h3 className="text-xl font-bold mb-2">{t("process.step2.title")}</h3>
-                <p className="text-gray-500 mb-4">
-                  Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                  consequat.
-                </p>
-                <div className="flex items-center text-yellow-500 font-medium">
-                  <span>{t("process.learnMore")}</span>
-                  <ArrowRight className="ml-2 h-4 w-4" />
-                </div>
-              </div>
-
-              {/* Process Step 3 */}
-              <div className="bg-white border-2 border-yellow-200 rounded-xl p-6 transition-all hover:shadow-lg hover:-translate-y-1">
-                <div className="w-12 h-12 bg-yellow-100 rounded-full flex items-center justify-center mb-4">
-                  <Award className="h-6 w-6 text-yellow-500" />
-                </div>
-                <h3 className="text-xl font-bold mb-2">{t("process.step3.title")}</h3>
-                <p className="text-gray-500 mb-4">
-                  Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-                </p>
-                <div className="flex items-center text-yellow-500 font-medium">
-                  <span>{t("process.learnMore")}</span>
-                  <ArrowRight className="ml-2 h-4 w-4" />
-                </div>
-              </div>
-
-              {/* Process Step 4 */}
-              <div className="bg-white border-2 border-yellow-200 rounded-xl p-6 transition-all hover:shadow-lg hover:-translate-y-1">
-                <div className="w-12 h-12 bg-yellow-100 rounded-full flex items-center justify-center mb-4">
-                  <BarChart className="h-6 w-6 text-yellow-500" />
-                </div>
-                <h3 className="text-xl font-bold mb-2">{t("process.step4.title")}</h3>
-                <p className="text-gray-500 mb-4">
-                  Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est
-                  laborum.
-                </p>
-                <div className="flex items-center text-yellow-500 font-medium">
-                  <span>{t("process.learnMore")}</span>
-                  <ArrowRight className="ml-2 h-4 w-4" />
-                </div>
-              </div>
-
-              {/* Process Step 5 */}
-              <div className="bg-white border-2 border-yellow-200 rounded-xl p-6 transition-all hover:shadow-lg hover:-translate-y-1">
-                <div className="w-12 h-12 bg-yellow-100 rounded-full flex items-center justify-center mb-4">
-                  <Gamepad2 className="h-6 w-6 text-yellow-500" />
-                </div>
-                <h3 className="text-xl font-bold mb-2">{t("process.step5.title")}</h3>
-                <p className="text-gray-500 mb-4">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
-                  dolore magna aliqua.
-                </p>
-                <div className="flex items-center text-yellow-500 font-medium">
-                  <span>{t("process.learnMore")}</span>
-                  <ArrowRight className="ml-2 h-4 w-4" />
-                </div>
-              </div>
-
-              {/* Process Step 6 */}
-              <div className="bg-white border-2 border-yellow-200 rounded-xl p-6 transition-all hover:shadow-lg hover:-translate-y-1">
-                <div className="w-12 h-12 bg-yellow-100 rounded-full flex items-center justify-center mb-4">
-                  <Rocket className="h-6 w-6 text-yellow-500" />
-                </div>
-                <h3 className="text-xl font-bold mb-2">{t("process.step6.title")}</h3>
-                <p className="text-gray-500 mb-4">
-                  Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                  consequat.
-                </p>
-                <div className="flex items-center text-yellow-500 font-medium">
-                  <span>{t("process.learnMore")}</span>
-                  <ArrowRight className="ml-2 h-4 w-4" />
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
+        <IncubationSteps />
 
         {/* Project Description */}
         <section className="py-20 bg-yellow-50">
@@ -302,7 +235,7 @@ function HomePage() {
               </div>
             </div>
 
-            <div className="mt-16 bg-yellow-50 rounded-xl p-8 text-center">
+            {/* <div className="mt-16 bg-yellow-50 rounded-xl p-8 text-center">
               <h3 className="text-2xl font-bold mb-4">{t("aboutUs.partners")}</h3>
               <div className="grid grid-cols-2 md:grid-cols-4 gap-8 items-center justify-items-center">
                 <div className="bg-white p-4 rounded-lg w-full h-20 flex items-center justify-center">
@@ -318,7 +251,7 @@ function HomePage() {
                   <img src="/placeholder.svg?height=40&width=120" alt="University Logo" className="max-h-10" />
                 </div>
               </div>
-            </div>
+            </div> */}
           </div>
         </section>
 
@@ -460,7 +393,7 @@ function HomePage() {
             <div>
               <div className="flex items-center gap-2 mb-4">
                 <Gamepad2 className="h-6 w-6 text-yellow-500" />
-                <span className="text-xl font-bold">GameLaunch</span>
+                <span className="text-xl font-bold">Grafit Games</span>
               </div>
               <p className="text-gray-400 text-sm">{t("footer.tagline")}</p>
             </div>
@@ -483,6 +416,11 @@ function HomePage() {
                   </Link>
                 </li>
                 <li>
+                  <Link href="#legal" className="text-gray-400 hover:text-yellow-500 text-sm">
+                    {t("nav.legal")}
+                  </Link>
+                </li>
+                <li>
                   <Link href="#signup" className="text-gray-400 hover:text-yellow-500 text-sm">
                     {t("signup.button")}
                   </Link>
@@ -493,31 +431,31 @@ function HomePage() {
               <h3 className="font-bold mb-4">{t("footer.resources")}</h3>
               <ul className="space-y-2">
                 <li>
-                  <Link href="#" className="text-gray-400 hover:text-yellow-500 text-sm">
+                  <Link href="#" className="text-gray-400 hover:text-gray-950 text-sm">
                     FAQ
                   </Link>
                 </li>
                 <li>
-                  <Link href="#" className="text-gray-400 hover:text-yellow-500 text-sm">
+                  <Link href="#" className="text-gray-400 hover:text-gray-950 text-sm">
                     Blog
                   </Link>
                 </li>
                 <li>
-                  <Link href="#" className="text-gray-400 hover:text-yellow-500 text-sm">
+                  <Link href="#" className="text-gray-400 hover:text-gray-950 text-sm">
                     Success Stories
                   </Link>
                 </li>
                 <li>
-                  <Link href="#" className="text-gray-400 hover:text-yellow-500 text-sm">
+                  <Link href="#" className="text-gray-400 hover:text-gray-950 text-sm">
                     Partners
                   </Link>
                 </li>
               </ul>
-            </div>
+            </div>   
             <div>
               <h3 className="font-bold mb-4">{t("footer.contact")}</h3>
               <ul className="space-y-2">
-                <li className="text-gray-400 text-sm">Email: info@gamelaunch.edu</li>
+                <li className="text-gray-400 text-sm">Email: info@grafit-games.edu</li>
                 <li className="text-gray-400 text-sm">Phone: (123) 456-7890</li>
                 <li className="text-gray-400 text-sm">Address: 123 University Ave, Game City, GC 12345</li>
               </ul>
