@@ -2,14 +2,14 @@
 
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
-import { Gamepad2, ArrowRight, Users, Rocket, Award, BarChart, Shield, FileText, Scale, BookOpen } from "lucide-react"
+import { Gamepad2, ArrowRight, BookOpen, Users, Rocket, Route, Shield, FileText, Scale, PaintRoller, HandCoins } from "lucide-react"
 import Link from "next/link"
 import { LanguageProvider, useLanguage } from "@/contexts/language-context"
 import { LanguageSwitcher } from "@/components/language-switcher"
 import { Textarea } from "@/components/ui/textarea";
 import { useState } from "react";
 
-const icons = [Users, Scale, Shield, Award, BookOpen, Rocket]
+const icons = [Users, Scale, PaintRoller, Route, Rocket, HandCoins]
 
 function IncubationSteps() {
   const { t } = useLanguage()
@@ -94,7 +94,11 @@ function HomePage() {
                     {t("hero.learnMore")}
                   </Button>
                 </a>
-                <Button variant="outline" className="border-yellow-500 text-yellow-500 hover:bg-yellow-50">{t("hero.watchDemo")}</Button>
+                <a href="https://fit.cvut.cz/cs/zivot-na-fit/aktualne/udalosti/20630-gamejam-2024" target="_blank" rel="noopener noreferrer">
+                  <Button variant="outline" className="border-yellow-500 text-yellow-500 hover:bg-yellow-50">
+                    {t("hero.related")}
+                  </Button>
+                </a>
               </div>
             </div>
           </div>
@@ -184,54 +188,43 @@ function HomePage() {
               <p className="text-gray-500 max-w-[700px]">{t("aboutUs.subtitle")}</p>
             </div>
 
-            <div className="grid md:grid-cols-3 gap-8">
+            <div className="grid md:grid-cols-2 gap-8">
               {/* Team Member 1 */}
-              <div className="bg-white border border-gray-100 rounded-xl p-6 shadow-sm hover:shadow-md transition-shadow">
-                <div className="w-24 h-24 bg-yellow-100 rounded-full mx-auto mb-4 overflow-hidden">
-                  <img
-                    src="/placeholder.svg?height=96&width=96"
-                    alt="Team Member"
-                    className="w-full h-full object-cover"
-                  />
+              <a href="https://fit.cvut.cz/en/faculty/organizational-structure/departments/527-department-of-software-engineering/people">
+                <div className="bg-white border border-gray-100 rounded-xl p-6 shadow-sm hover:shadow-md transition-shadow">
+                  <div className="w-24 h-24 bg-yellow-100 rounded-full mx-auto mb-4 overflow-hidden">
+                    <img
+                      href="https://fit.cvut.cz/en/faculty/organizational-structure/departments/527-department-of-software-engineering/people"
+                      src="/matousek-profile.avif?height=96&width=96"
+                      alt="Team Member"
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
+                  <h3 className="text-xl font-bold mb-1 text-center">Ing. Honza Matoušek</h3>
+                  <p className="text-yellow-500 text-sm mb-4 text-center">Industry Mentor</p>
+                  <p className="text-gray-500 text-center">
+                  Alumni of the Faculty of Information Technology, member of the Department of Software Engineering 
+                  </p>
                 </div>
-                <h3 className="text-xl font-bold mb-1 text-center">Dr. Jane Smith</h3>
-                <p className="text-yellow-500 text-sm mb-4 text-center">Program Director</p>
-                <p className="text-gray-500 text-center">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore.
-                </p>
-              </div>
+              </a>
 
               {/* Team Member 2 */}
-              <div className="bg-white border border-gray-100 rounded-xl p-6 shadow-sm hover:shadow-md transition-shadow">
-                <div className="w-24 h-24 bg-yellow-100 rounded-full mx-auto mb-4 overflow-hidden">
-                  <img
-                    src="/placeholder.svg?height=96&width=96"
-                    alt="Team Member"
-                    className="w-full h-full object-cover"
-                  />
+              <a href="https://fit.cvut.cz/en/faculty/organizational-structure/departments/527-department-of-software-engineering/people">
+                <div className="bg-white border border-gray-100 rounded-xl p-6 shadow-sm hover:shadow-md transition-shadow">
+                  <div className="w-24 h-24 bg-yellow-100 rounded-full mx-auto mb-4 overflow-hidden">
+                    <img
+                      src="/brem-profile.avif?height=96&width=96"
+                      alt="Team Member"
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
+                  <h3 className="text-xl font-bold mb-1 text-center">Bc. Ondřej Brém, MSc.</h3>
+                  <p className="text-yellow-500 text-sm mb-4 text-center">Industry Mentor</p>
+                  <p className="text-gray-500 text-center">
+                    Alumni of Aalto, FIN and KTH, SWE, member of the Department of Software Engineering 
+                  </p>
                 </div>
-                <h3 className="text-xl font-bold mb-1 text-center">John Davis</h3>
-                <p className="text-yellow-500 text-sm mb-4 text-center">Industry Mentor</p>
-                <p className="text-gray-500 text-center">
-                  Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo.
-                </p>
-              </div>
-
-              {/* Team Member 3 */}
-              <div className="bg-white border border-gray-100 rounded-xl p-6 shadow-sm hover:shadow-md transition-shadow">
-                <div className="w-24 h-24 bg-yellow-100 rounded-full mx-auto mb-4 overflow-hidden">
-                  <img
-                    src="/placeholder.svg?height=96&width=96"
-                    alt="Team Member"
-                    className="w-full h-full object-cover"
-                  />
-                </div>
-                <h3 className="text-xl font-bold mb-1 text-center">Sarah Johnson</h3>
-                <p className="text-yellow-500 text-sm mb-4 text-center">Legal Advisor</p>
-                <p className="text-gray-500 text-center">
-                  Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-                </p>
-              </div>
+              </a>
             </div>
 
             {/* <div className="mt-16 bg-yellow-50 rounded-xl p-8 text-center">
