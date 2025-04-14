@@ -82,11 +82,10 @@ function HomePage() {
                 {t("hero.badge")}
               </div>
               <h1 className="text-4xl md:text-6xl font-bold tracking-tighter max-w-3xl">
-                {t("hero.title").split("Successful")[0]}
+                {t("hero.title1")}
                 <span className="text-yellow-500">
-                  {t("hero.title").includes("Successful") ? "Successful Business" : ""}
+                  {t("hero.title2")}
                 </span>
-                {t("hero.title").split("Successful")[1] || ""}
               </h1>
               <p className="text-gray-500 md:text-xl max-w-[700px]">{t("hero.description")}</p>
               <div className="flex flex-col sm:flex-row gap-4 mt-8">

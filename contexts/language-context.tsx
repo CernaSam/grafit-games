@@ -22,9 +22,9 @@ const translations = {
     
     // Hero
     "hero.badge": "🚧 Launching Soon!  Expected: September 2026 🔧",
-    "hero.title": "Turn Your Student Game Into a Successful Business",
-    "hero.description":
-    "Grafit Games provides the legal structure and funding you need to take your developed game from classroom project to market success.",
+    "hero.title1": "Turn Your Student Game Into a ",
+    "hero.title2": "Successful Business",
+    "hero.description": "Grafit Games provides the legal structure and funding you need to take your developed game from classroom project to market success.",
     "hero.learnMore": "Learn About Grafit",
     "hero.watchDemo": "Watch Demo",
     
@@ -130,7 +130,8 @@ const translations = {
 
     // Hero
     "hero.badge": "🚧 Spouštíme brzy!  Odhad: Září 2026 🔧",
-    "hero.title": "Proměňte svou studentskou hru v úspěšný byznys",
+    "hero.title1": "Proměňte svou studentskou hru v ",
+    "hero.title2": "úspěšný byznys",
     "hero.description":
       "Grafit Games poskytuje právní strukturu a financování, které potřebujete k přeměně vaší hry ze školního projektu na úspěšný produkt.",
     "hero.learnMore": "Zjistit více o Grafit",
