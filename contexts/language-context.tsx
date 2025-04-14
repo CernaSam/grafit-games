@@ -18,7 +18,7 @@ const translations = {
     "nav.legal": "Legal Form",
 
     // Hero
-    "hero.badge": "Launching 2026",
+    "hero.badge": "🚧 Launching Soon!  Expected: September 2026 🔧",
     "hero.title": "Turn Your Student Game Into a Successful Business",
     "hero.description":
       "GameLaunch provides the legal structure and funding you need to take your developed game from classroom project to market success.",
@@ -76,7 +76,7 @@ const translations = {
     "signup.subtitle": "Be the first to know when applications open for our 2026 cohort",
     "signup.name": "Full Name",
     "signup.email": "Email",
-    "signup.university": "University",
+    "signup.discord": "Discord Username (optional)",
     "signup.game": "Game Project (optional)",
     "signup.button": "Sign Up for Updates",
     "signup.terms": "By signing up, you agree to our",
@@ -101,7 +101,7 @@ const translations = {
     "nav.legal": "Legální forma",
 
     // Hero
-    "hero.badge": "Spouštíme 2026",
+    "hero.badge": "🚧 Spouštíme brzy!  Odhad: Září 2026 🔧",
     "hero.title": "Proměňte svou studentskou hru v úspěšný byznys",
     "hero.description":
       "GameLaunch poskytuje právní strukturu a financování, které potřebujete k přeměně vaší hry ze školního projektu na úspěšný produkt.",
@@ -159,7 +159,7 @@ const translations = {
     "signup.subtitle": "Buďte první, kdo se dozví, kdy se otevřou přihlášky pro náš ročník 2026",
     "signup.name": "Celé jméno",
     "signup.email": "Email",
-    "signup.university": "Univerzita",
+    "signup.discord": "Discord uživatelské jméno (volitelné)",
     "signup.game": "Herní projekt (volitelné)",
     "signup.button": "Přihlásit se k odběru novinek",
     "signup.terms": "Přihlášením souhlasíte s našimi",

@@ -6,6 +6,7 @@ import { Gamepad2, ArrowRight, Users, Rocket, Award, BarChart, Shield, FileText,
 import Link from "next/link"
 import { LanguageProvider, useLanguage } from "@/contexts/language-context"
 import { LanguageSwitcher } from "@/components/language-switcher"
+import { Textarea } from "@/components/ui/textarea";
 
 function HomePage() {
   const { t } = useLanguage()
@@ -424,16 +425,17 @@ function HomePage() {
                   <Input id="email" type="email" placeholder="john@example.com" />
                 </div>
                 <div className="space-y-2">
-                  <label htmlFor="university" className="text-sm font-medium">
-                    {t("signup.university")}
+                  <label htmlFor="discord" className="text-sm font-medium">
+                    {t("signup.discord")}
                   </label>
-                  <Input id="university" placeholder="Your University" />
+                  <Input id="discord" placeholder="user.name" />
                 </div>
                 <div className="space-y-2">
                   <label htmlFor="game" className="text-sm font-medium">
                     {t("signup.game")}
                   </label>
-                  <Input id="game" placeholder="Brief description of your game" />
+                  {/* <Input id="game" placeholder="Brief description of your game" /> */}
+                  <Textarea id="game" rows={3} placeholder="Brief description of your game" />
                 </div>
                 <Button className="w-full bg-yellow-500 hover:bg-yellow-600 text-white">{t("signup.button")}</Button>
                 <p className="text-xs text-gray-500 text-center mt-4">
